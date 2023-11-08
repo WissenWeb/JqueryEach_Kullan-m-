@@ -1,0 +1,195 @@
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<style>
+
+    cssred{
+    
+        color:red
+
+    }
+
+
+    cssblue {
+        color: blue
+
+    }
+
+
+</style>
+
+<select class="select">
+    <option>Ankara</option>
+    <option>İzmir</option>
+    <option>Uşak</option>
+    <option>Karabük</option>
+</select>
+
+
+
+
+<p>Ferrari</p>
+
+<p>Audi</p>
+
+<p>Toyota</p>
+
+<p class="css">Mercedes</p>
+
+<p>BMW</p>
+
+<p class="css">Opel</p>
+
+<input class="btnRenklendir" type="button" value="Renklendir" />
+
+
+<a href="">Href dynamic</a>
+
+<input class="btnhref" type="button" value="Href Ata" />
+
+<input class="btnhrefsil" type="button" value="Href Sil" />
+
+
+<p class="eq">Köpek</p>
+
+<p class="eq">Fare</p>
+
+<p class="eq">Kedi</p>
+
+<p class="eq">Kuş</p>
+
+<p class="eq">At</p>
+
+<p class="eq">Manda</p>
+
+<p class="eq">Öküz</p>
+
+<p class="eq">Eşek</p>
+
+<input class="makeeq" type="button" value="EQ yap"/>
+
+
+<input type="text" value="Test" />
+
+<input class="btn" type="button" value="CSS" />
+
+
+<script>
+
+    $(document).ready(function () {
+
+
+        debugger;
+
+        var name = "Wissen";
+
+        // Jquery dizi-koleksiyon tanımı
+        var liste = ["Ankara", "İstanbul", "Manisa", "Muğla", "Adıyaman", "Karabük", "Konya", "Bartın", "Zonguldak"];
+
+
+        // each fonksiyonu ile, dizi-koleksiyon içerisinde dönebilirsiniz(foreach)
+        $.each(liste, function (index, data) {
+
+            $("body").append("<input type='button' value='" + data + "'/>");
+
+        });
+
+
+        $(".button").click(function () {
+
+
+            $(this).fadeOut("slow");
+
+        });
+
+
+        $.ajax({
+
+            type: "POST",
+            url: "/Home/Index",
+            success: function (data) {
+                var li;
+
+                $.each(data, function (index, data) {
+
+                    li.append("<li>" + data + "</li>")
+
+                });
+
+                $("body").append("<ul>" + li + "</ul>")
+
+            }
+
+
+        });
+
+
+
+
+        // Change örneği, (dropdown change olduğunda tetiklenir.)
+        $(".select").change(function (value, selected) {
+
+            alert($(this).val());
+
+        });
+
+
+        // Css metodunu kullanarak öğelere css ekleyebilirsiniz.
+        // css
+        $(":text").css("color", "red");
+
+
+        $(".btn").css({
+
+            "background-color": "yellow",
+            "font-size": "24px",
+            "color": "red",
+            "border": "dotted"
+        });
+
+        // Filter, filter içerisinde istediğiniz selectorü verebilirsiniz. (bu örnekte, p'lerin içerisinde, .css isimli class olan p'lerin arka planını renklendirdik)
+
+        $(".btnRenklendir").click(function () {
+
+            $("p").filter(".css").css("background-color", "red");
+
+        });
+
+        //eq metodu( İNDEX BAZLI ELEMENT GEÇİŞİ İÇİN KULLANILIR EQ 2 DEMEK ÜSTTEN 2. ELEMANI AL DEMEK)
+
+        $(".makeeq").click(function () {
+
+            $(".eq").eq(2).css("background-color", "green");
+
+            $(".eq").eq(-3).css("background-color", "red");
+
+        });
+
+
+        // Attribute
+
+        $(".btnhref").click(function () { 
+        
+        
+            // a'nın href alanına bu değeri ata dedik..
+            $("a").attr("href", "http://www.google.com");
+            $("a").attr("class", "cssred");
+            $("a").attr("wissen", "test verisi");
+            
+        
+        
+        });
+        
+        $(".btnhrefsil").click(function () {
+        
+        
+            $("a").removeAttr("href");
+        
+        
+        });
+
+
+
+
+    });
+
+</script>
